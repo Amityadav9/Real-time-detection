@@ -46,7 +46,7 @@ Performs real-time object detection using a webcam.
 Displays annotated video in real-time.
 
 python rt_detrv2_live_detection.py
-Combined Detection and Captioning (detection_caption.py)
+Combined Detection and Captioning (main.py)
 
 Combines object detection with image captioning using the BLIP model.
 Provides scene descriptions along with detections.
