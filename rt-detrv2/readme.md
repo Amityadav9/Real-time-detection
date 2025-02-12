@@ -1,12 +1,13 @@
-# Real-Time Object Detection with RT-DETRv2
+# Real-Time Object Detection with YOLO and RT-DETRv2
 
-This repository contains two implementations of real-time object detection using the RT-DETRv2 model. The first implementation focuses solely on object detection, while the second combines object detection with image captioning using the BLIP model.
+This repository contains implementations of real-time object detection using two popular models: YOLO and RT-DETRv2. The code is designed to process video files and perform real-time object detection.
 
 ## Overview
 
-RT-DETRv2 is a state-of-the-art real-time object detection model that builds upon the original RT-DETR architecture. It introduces selective multi-scale feature extraction and improved training strategies for better performance while maintaining real-time capabilities.
+- **YOLO**: A widely-used real-time object detection system known for its speed and accuracy.
+- **RT-DETRv2**: A state-of-the-art real-time object detection model that builds upon the original RT-DETR architecture, introducing selective multi-scale feature extraction and improved training strategies for better performance while maintaining real-time capabilities.
 
-### Features
+## Features
 
 - Real-time object detection with bounding boxes
 - Multi-class object recognition
@@ -14,79 +15,65 @@ RT-DETRv2 is a state-of-the-art real-time object detection model that builds upo
 - GPU acceleration support
 - Customizable confidence thresholds
 - Color-coded visualization
-- Optional image captioning (in combined version)
+- Optional image captioning (in combined version with RT-DETRv2)
 
-## Installation
+## Implementation Details
 
-### Prerequisites
+### YOLO Implementation
 
-- Python 3.8 or higher
-- CUDA-compatible GPU (recommended)
-- Webcam or video input device
+1. **Basic Object Detection (`yolo_video_detection.py`)**
+   - Processes video files using the YOLO model.
+   - Saves annotated video with detections.
 
-### Required Packages
+   ```bash
+   python yolo_video_detection.py
+Real-Time Object Detection (yolo_live_detection.py)
 
-```bash
+Performs real-time object detection using a webcam.
+Displays annotated video in real-time.
+
+python yolo_live_detection.py
+RT-DETRv2 Implementation
+Basic Object Detection (rt_detrv2_video_detection.py)
+
+Processes video files using the RT-DETRv2 model.
+Saves annotated video with detections.
+
+python rt_detrv2_video_detection.py
+Real-Time Object Detection (rt_detrv2_live_detection.py)
+
+Performs real-time object detection using a webcam.
+Displays annotated video in real-time.
+
+python rt_detrv2_live_detection.py
+Combined Detection and Captioning (detection_caption.py)
+
+Combines object detection with image captioning using the BLIP model.
+Provides scene descriptions along with detections.
+
+python detection_caption.py
+Differences Between YOLO and RT-DETRv2
+Ease of Use: YOLO is generally easier to set up and use, especially for real-time applications, due to its straightforward API and extensive documentation.
+
+Performance: YOLO models are known for their speed and accuracy in real-time object detection tasks. RT-DETRv2 might offer different trade-offs in terms of accuracy and speed, depending on the specific model and use case.
+
+Model Size and Requirements: YOLO models are typically lighter and can run efficiently on various hardware, including edge devices. RT-DETRv2 models might be more resource-intensive.
+
+Customization: Both frameworks allow for customization, but YOLO might be more flexible for quick adjustments and tuning.
+
+Installation
+Prerequisites
+Python 3.8 or higher
+CUDA-compatible GPU (recommended)
+Webcam or video input device
+Required Packages
+
 pip install torch torchvision
 pip install transformers
 pip install opencv-python
 pip install pillow
 pip install numpy
-```
-
-## Implementation Details
-
-### Version 1: Basic Object Detection (`RealTimeObjectDetector`)
-
-This implementation focuses solely on real-time object detection. The main components include:
-
-1. Model Initialization:
-```python
-detector = RealTimeObjectDetector(
-    model_name="PekingU/rtdetr_v2_r50vd",
-    confidence_threshold=0.5
-)
-```
-
-2. Key Features:
-- Real-time object detection
-- Confidence-based filtering
-- Automatic color generation for different object classes
-- FPS monitoring
-- Interactive camera feed
-
-### Version 2: Combined Detection and Captioning (`RealTimeDetectionAndCaption`)
-
-This implementation combines object detection with image captioning. The main components include:
-
-1. Model Initialization:
-```python
-detector = RealTimeDetectionAndCaption(
-    detection_model="PekingU/rtdetr_v2_r50vd",
-    caption_model="Salesforce/blip-image-captioning-large",
-    confidence_threshold=0.5
-)
-```
-
-2. Additional Features:
-- Scene description generation
-- Dual model processing (detection + captioning)
-- Periodic caption updates
-- Enhanced visualization with both detections and descriptions
-
-## Usage
-
-### Basic Object Detection
-
-```python
-from object_detection import RealTimeObjectDetector
-
-# Create detector instance
-detector = RealTimeObjectDetector()
-
-# Start real-time detection
-detector.start_detection(camera_index=0, display_fps=True)
-```
+pip install ultralytics
 
 ### Combined Detection and Captioning
 
